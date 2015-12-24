@@ -30,4 +30,5 @@
 img = imread('bee.jpg');
 [labels, numlabels] = slicmex(img,500,20);%numlabels is the same as number of superpixels
 imagesc(labels);
+imagesc(labels);
 
