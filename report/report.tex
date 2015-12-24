@@ -1,0 +1,272 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{listings}
+%\usepackage[figure]{placeins}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Problem Set 5}                             % Title
+\author{Halil \.{I}brahim \"{O}zt\"{u}rk \& Furkan Karakuş}               % Author
+\date{\today}                                           % Date
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{hacettepe.jpg}\\[1.0 cm]   % University Logo
+    \textsc{\LARGE University of Hacettepe}\\[2.0 cm]   % University Name
+    \textsc{\Large BBM 415}\\[0.5 cm]               % Course Code
+    \textsc{\large Image Processing Laboratory}\\[0.5 cm]               % Course Name
+    \rule{\linewidth}{0.2 mm} \\[0.4 cm]
+    { \huge \bfseries \thetitle}\\
+    \rule{\linewidth}{0.2 mm} \\[1.5 cm]
+    
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushleft} \large
+	   Halil \.{I}brahim \"{O}zt\"{u}rk \\
+            21328375                                   % Your Student Number
+
+         \end{flushleft}
+            \end{minipage}~
+            \begin{minipage}{0.4\textwidth}
+         \begin{flushright} \large
+            Furkan Karakuş \\
+            21228453                                   % Your Student Number
+
+        \end{flushright}
+    \end{minipage}\\[2 cm]
+    
+    {\large \thedate}\\[2 cm]
+ 
+    \vfill
+    
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Usign Laplacian Pyramid for Image Enhancement}
+\subsection{Problem Definition}
+When an scene captured with same camera but different focuses produces images whose contains details about different regions, in the same way different exposure times at same camera produces different images. Problem is that combining these images into one image, this image is called multifocus image.
+
+\subsection{Solution}
+\subsubsection{Laplacian Pyramid}
+Laplacian pyramid shares same structure but one different laplacian stores difference of adjacent levels and original of top level.
+
+"In a Gaussian pyramid, subsequent images are weighted down using a Gaussian average (Gaussian blur) and scaled down. Each pixel containing a local average that corresponds to a pixel neighborhood on a lower level of the pyramid. This technique is used especially in texture synthesis." \cite{1}
+\subsubsection{Steps}
+\begin{enumerate}
+\item Construct n level laplacian pyramids from two images.
+\item{ Create a mask for each pyramid level
+	\begin{equation*}
+	  if\quad abs(pyr1_i(n) > abs(pyr2_i(n))) \quad then \quad M_i = 1 \quad else \quad M_i = 0
+	\end{equation*}
+     } 
+\item Combine two pyramid into one pyramid using procuded mask in second step.
+\item Reconstruct produced pyramid in third step.
+\end{enumerate}
+
+\subsubsection{Matlab Application}
+\paragraph{Halfing images} for constructing pyramid is first subproblem. Downsampling, another name of this problem, is implemented in \textit{halfimg.m} with 5 by 5 gaussian filtering. 
+
+\begin{center}
+$\left[ \begin{matrix}	
+    1/256 & 4/256 & 6/256 & 4/256 & 1/256\\
+    4/256 & 16/256 & 24/256 & 16/256 & 4/256 \\
+    6/256 & 24/256 & 36/256 & 24/256 & 6/256 \\
+    4/256 & 16/256 & 24/256 & 16/256 & 4/256 \\
+    1/256 & 4/256 & 6/256 & 4/256 & 1/256 
+ \end{matrix} \right]$ 
+\end{center}
+This kernel is applied to image during downsampling process with \textit{imfilter}. Then one pixel is choosed from each 2x2 matrices. This process returns half of given image. 
+\paragraph{Doubling images}for getting difference of adjacent levels during construction laplacian pyramid  is second subproblem. Firt way for doubling images is put each pixel in given nxm matrix to 2x2 matrices. This produces (2*n-1)x(2*m-1) matrix first way ends here. Second way is continue from ends of first way with filtering by 5x5 gaussian filter. \textit{conv2} is used in code for this process.
+%\hspace{1 cm}
+\subsubsection{Inputs Outputs}
+
+\begin{figure}[H]
+\includegraphics[width=200px]{Inputs/Multifocus/f01.jpg}
+\includegraphics[width=200px]{Inputs/Multifocus/f13.jpg}
+\caption{Left focused and right focused images.}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=330px]{Outputs/Multifocus/f1_13_multi_pyr2.jpg}
+\caption{2 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=330px]{Outputs/Multifocus/f1_13_multi_pyr3.jpg}
+\caption{3 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=330px]{Outputs/Multifocus/f1_13_multi_pyr5.jpg}
+\caption{5 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=330px]{Outputs/Multifocus/f1_13_multi_pyr7.jpg}
+\caption{7 level pyramid}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=200px]{Inputs/Multifocus/focal1.png}
+\includegraphics[width=200px]{Inputs/Multifocus/focal2.png}
+\caption{Left focused and right focused images.}
+\includegraphics[width=200px]{Outputs/Multifocus/focal1_2_multi_pyr2.jpg}
+\caption{2 level pyramid}
+
+\end{figure}
+
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=200px]{Outputs/Multifocus/focal1_2_multi_pyr3.jpg}
+\caption{3 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=200px]{Outputs/Multifocus/focal1_2_multi_pyr5.jpg}
+\caption{5 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+
+\centering
+\includegraphics[width=200px]{Outputs/Multifocus/focal1_2_multi_pyr7.jpg}
+\caption{7 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+
+\includegraphics[width=200px]{Inputs/Multifocus/p1.jpg}
+\includegraphics[width=200px]{Inputs/Multifocus/p2.jpg}
+\caption{Left focused and right focused images.}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=150px]{Outputs/Multifocus/p1_2_multi_pyr2.jpg}
+\caption{2 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=150px]{Outputs/Multifocus/p1_2_multi_pyr3.jpg}
+\caption{3 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=150px]{Outputs/Multifocus/p1_2_multi_pyr5.jpg}
+\caption{5 level pyramid}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=150px]{Outputs/Multifocus/p1_2_multi_pyr7.jpg}
+\caption{7 level pyramid}
+\end{figure}
+
+\subsection{Effects of Parameters}
+\paragraph{Number of laplacian pyramid levels}is single parameter of multifocus function. Each level of pyramid contains frequancies of different ranges of orginal image. If number of level is increased, more range will enter to multifocusing process; this means success of the process will be increased. Figure 3 and Figure 5 shows this very well.
+
+\section{Moire Pattern Suppression}
+\subsection{Solution}
+Morie pattern can be identified in frequency domain and patterns can be removed with notch filter. For this, pixel domain is translated to frequency domain by \textit{fft2} and \textit{fftshift}. \textit{abs} is used for getting magnitudes and \textit{log} for get more clear figure. 
+\subsubsection{Implemetation of Notch Filter}
+Selected points are masked in frequency domain at this step. Frequency component that corresponds to the Morie pattern share same shape with circle. Becuse of this an circle should be generated first for masking frequency components.  
+\\
+\begin{lstlisting}
+[x,y] =meshgrid(linspace(-r,+r,2*r+1), linspace(-r,r,2*r+1));
+out = x.^2 + y.^2 <= r^2;
+\end{lstlisting}
+
+This part of code generates an circle, all that's left is masking marked regions in frequency domain.
+
+\subsection{Inputs Outputs}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=200px]{Inputs/MoirePattern/hw4_radiograph_1.jpg}
+\includegraphics[width=200px]{Outputs/MoirePattern/radio1_freq.jpg}
+\caption{Radiograph and Frequacy Domain of Radiograph}
+
+\includegraphics[width=200px]{Outputs/MoirePattern/radio1_freq_sup.jpg}
+\includegraphics[width=200px]{Outputs/MoirePattern/radio1_sup.jpg}
+\caption{Masked points in Frequency Domain and Output Radiograph}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=100px]{Inputs/MoirePattern/hw4_radiograph_2.jpg}
+\includegraphics[width=200px]{Outputs/MoirePattern/radio2_freq.jpg}
+\caption{Radiograph and Frequency Domain of Radiograph}
+
+\includegraphics[width=200px]{Outputs/MoirePattern/radio2_freq_sup.jpg}
+\includegraphics[width=100px]{Outputs/MoirePattern/radio2_sup.jpg}
+\caption{Masked points in Frequency Domain and Output Radiograph}
+
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=200px]{Inputs/MoirePattern/noiseball.png}
+\includegraphics[width=200px]{Outputs/MoirePattern/noiseball_freq.jpg}
+\caption{Radiograph and Frequency Domain of Radiograph}
+
+\includegraphics[width=200px]{Outputs/MoirePattern/noiseball_freq_sup.jpg}
+\includegraphics[width=200px]{Outputs/MoirePattern/noiseball_sup.png}
+\caption{Masked points in Frequency Domain and Output Radiograph}
+
+\end{figure}
+
+\bibliographystyle{plain}
+\bibliography{biblist}
+  \begin{thebibliography}{1}
+  \bibitem{1} \url{https://en.wikipedia.org/wiki/Pyramid_(image_processing)}
+  \end{thebibliography}             
+\end{document}
+
+
