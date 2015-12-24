@@ -1,0 +1,2 @@
+//selam olsun okuyan herkese
+
