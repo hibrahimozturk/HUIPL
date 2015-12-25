@@ -6,7 +6,7 @@ c = zeros(k,3);
 temp = cell(1,k);
 sect = zeros(rw,cl,k);
 for i=1:k
-    c(i,:) = [rand rand rand];
+    c(i,:) = [i/k i/k i/k];
 end
 cstart = zeros(k,3);
 while(sum(sum(cstart == c)) ~= k*3)
