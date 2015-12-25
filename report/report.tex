@@ -215,7 +215,7 @@ This kernel is applied to image during downsampling process with \textit{imfilte
 \subsection{Solution}
 Morie pattern can be identified in frequency domain and patterns can be removed with notch filter. For this, pixel domain is translated to frequency domain by \textit{fft2} and \textit{fftshift}. \textit{abs} is used for getting magnitudes and \textit{log} for get more clear figure. 
 \subsubsection{Implemetation of Notch Filter}
-Selected points are masked in frequency domain at this step. Frequency component that corresponds to the Morie pattern share same shape with circle. Becuse of this an circle should be generated first for masking frequency components.  
+
 \\
 \begin{lstlisting}
 [x,y] =meshgrid(linspace(-r,+r,2*r+1), linspace(-r,r,2*r+1));
