@@ -10,6 +10,8 @@ for i=1:k
 end
 cstart = zeros(k,3);
 while(sum(sum(cstart == c)) ~= k*3)
+    c
+    cstart
 cstart = c;
 for i=1:k
     temp{i}(1:rw, 1:cl, 1) = c(i,1);  
