@@ -1,0 +1,125 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{listings}
+%\usepackage[figure]{placeins}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Problem Set 5}                             % Title
+\author{Halil \.{I}brahim \"{O}zt\"{u}rk \& Furkan Karakuş}               % Author
+\date{\today}                                           % Date
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{hacettepe.jpg}\\[1.0 cm]   % University Logo
+    \textsc{\LARGE University of Hacettepe}\\[2.0 cm]   % University Name
+    \textsc{\Large BBM 415}\\[0.5 cm]               % Course Code
+    \textsc{\large Image Processing Laboratory}\\[0.5 cm]               % Course Name
+    \rule{\linewidth}{0.2 mm} \\[0.4 cm]
+    { \huge \bfseries \thetitle}\\
+    \rule{\linewidth}{0.2 mm} \\[1.5 cm]
+    
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushleft} \large
+	   Halil \.{I}brahim \"{O}zt\"{u}rk \\
+            21328375                                   % Your Student Number
+
+         \end{flushleft}
+            \end{minipage}~
+            \begin{minipage}{0.4\textwidth}
+         \begin{flushright} \large
+            Furkan Karakuş \\
+            21228453                                   % Your Student Number
+
+        \end{flushright}
+    \end{minipage}\\[2 cm]
+    
+    {\large \thedate}\\[2 cm]
+ 
+    \vfill
+    
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction}
+Clustering can be considered the most important unsupervised learning problem; so, as every other problem of this kind, it deals with finding a structure in a collection of unlabeled data.
+A loose definition of clustering could be the process of organizing objects into groups whose members are similar in some way.
+A cluster is therefore a collection of objects which are similar between them and are dissimilar to the objects belonging to other clusters. Feature is point of interest for image description.
+
+
+\section{Pixel Level Features}
+
+Two different features for each pixel in the image obtained; RGB colors feature and spatial location feature in a vector like [R G B x y]. It was used for the K-means clustering. Color and location values have different range of numbers.Special attention was paid for it.
+
+\section{Superpixel Level Features}
+\subsection{Problem Definition}
+In this part we introduce a novel algorithm called SLIC (Simple Linear Iterative Clustering) that clusters pixels in the combined three-dimensional color and image plane space to efficiently generate superpixels. 
+
+\subsection{Solution}
+\subsubsection{Steps}
+
+
+
+\subsubsection{Inputs Outputs}
+
+
+\subsection{Effects of Parameters}
+\paragraph{•}
+
+\section{K-means Clustering}
+K-means clustering is the easiest way to fix clustering problem. The main idea is to define k field, one for each cluster. 
+\subsection*{Steps for K-means Clustering}
+\begin{enumerate}
+\item Randomly place K points into the space represented by the objects that are being clustered. These points represent initial group fields.
+\item Assign each object to the group that has the closest field.
+\item When all objects have been assigned, recalculate the positions of the K field.
+\item Repeat Steps 2 and 3 until no more longer move..
+\end{enumerate}
+\subsection{Solution}
+
+
+\subsubsection{Inputs Outputs}
+
+
+\subsection{Effects of Parameters}
+\paragraph{•}
+
+\bibliographystyle{plain}
+\bibliography{biblist}
+  \begin{thebibliography}{1}
+  \bibitem{1} \url{https://en.wikipedia.org/wiki/Pyramid_(image_processing)}
+  \end{thebibliography}             
+\end{document}
+
