@@ -1,5 +1,5 @@
-function labels = superpixel_rgb(I, k)
-    [slabels, numlabels] = slicmex(I,500,20);
+function labels = superpixel_rgb(I, k, n, s)
+    [slabels, numlabels] = slicmex(I,n,s);
     [rw,cl,channel] = size(I);
     meanRGB = zeros(numlabels, channel);
     %Init vectors from superpixels
@@ -12,7 +12,7 @@ function labels = superpixel_rgb(I, k)
     c = zeros(k, channel);
     for i=1:k
         for j=1:channel
-            c(i,j) = (max(meanRGB(:,j))-min(meanRGB(:,j)))*i/k;
+            c(i,j) = (max(meanRGB(:,j)))*i/k;
         end
     end
     cstart = zeros(k, channel);
@@ -28,7 +28,7 @@ function labels = superpixel_rgb(I, k)
         end
 
        for i=1:k
-           c(i,1) = sum((dist(:,1) == i).*meanRGB(:,1))/nnz(dist(:,1) == i);
+           c(i,1) = sum((dist(:,1) == i).*meanRGB(:,1))/(nnz(dist(:,1) == i)+1);
        end
     end
     
