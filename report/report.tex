@@ -82,16 +82,76 @@ A cluster is therefore a collection of objects which are similar between them an
 \section{Pixel Level Features}
 
 Two different features for each pixel in the image obtained; RGB colors feature and RGB colors and spatial location feature in a vector like [R G B] and [R G B x y]. It was used for the K-means clustering. Color and location values have different range of numbers.Special attention was paid for it.
+\subsection{Effects of Parameters}
+We used  mxnx3 matrix for RGB color feature. We used mxnx5 matrix for RGBxy. For RGB color feature, we were interested in just color information. However we had color and location values for RGB color and spatial location feature. We can say about k that if it is increased, the results show us details of image. When we compare two steps, in the second step we used location information too. 
+
+\subsection{Inputs Outputs}
+\subsubsection{RGB Color Feature}
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=5;}\\[0.1 cm]  
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{rgb/bee_k_5.jpg}
+		\end{figure}	
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=10;}\\[0.1 cm]  
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{rgb/bee_k_10.jpg}
+		\end{figure}
+
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=15;}\\[0.1 cm]  
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{rgb/bee_k_15.jpg}
+		\end{figure}
+\end{minipage}
+
+
+
+\subsubsection{RGB Color And Spatial Location Feature}
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=5;}\\[0.1 cm]  
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{rgbxyz/bee_k_5.jpg}
+		\end{figure}	
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=10;}\\[0.1 cm]  
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{rgbxyz/bee_k_10.jpg}
+		\end{figure}
+
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=15;}\\[0.1 cm]  
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{rgbxyz/bee_k_15.jpg}
+		\end{figure}
+\end{minipage}
+
 
 \section{Superpixel Level Features}
 \subsection{Problem Definition}
 In this part we introduce a novel algorithm called SLIC (Simple Linear Iterative Clustering) that clusters pixels in the combined three-dimensional color and image plane space to efficiently generate superpixels.There are three case; mean of RGB color values, RGB color histogram and mean of Gabor filter responses.For first step, it should be gotten mean of RGB color values.For second step, every superpixel should be represented the mean of color values for pixels by RGB color histogram. For last step, it should be created special Gabor filters and they should be kept in a filterbank. Then the image should be filtered with in Gabor filterbank. Each superpixel should be represented mean of Gabor filter response values of every pixel.
 
 \subsection{Solution}
-It was created a matrix which has size of 3x256.
-\subsubsection{Steps}
-
-
 
 \subsubsection{Inputs Outputs}
 
@@ -180,14 +240,100 @@ It was created a matrix which has size of 3x256.
 	\end{minipage}
 \end{minipage}
 
-\subsubsection*{RGB Color Histogram}
 
+
+\subsubsection*{RGB Color Histogram}
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=5;}\\[0.1 cm]  
+	\begin{minipage}{0.45\linewidth}
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_5_500.jpg}
+	 		\caption{superpixel level=500}
+		\end{figure}
+	\end{minipage}
+	\hspace{0.05\linewidth}
+	\begin{minipage}{0.45\linewidth}
+			\begin{figure} [H]
+				\centering
+				 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_5_2000.jpg}
+	 			\caption{superpixel level=2000}
+			\end{figure}
+	\end{minipage}
+	\hspace{0.05\linewidth}
+	\begin{minipage}{0.45\linewidth}
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_5_5000.jpg}
+	 		\caption{superpixel level=5000}
+		\end{figure}
+	\end{minipage}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=10;}\\[0.1 cm]  
+	\begin{minipage}{0.45\linewidth}
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_10_500.jpg}
+	 		\caption{superpixel level=500}
+		\end{figure}
+	\end{minipage}
+	\hspace{0.05\linewidth}
+	\begin{minipage}{0.45\linewidth}
+			\begin{figure} [H]
+				\centering
+				 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_10_2000.jpg}
+	 			\caption{superpixel level=2000}
+			\end{figure}
+	\end{minipage}
+	\hspace{0.05\linewidth}
+	\begin{minipage}{0.45\linewidth}
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_10_5000.jpg}
+	 		\caption{superpixel level=5000}
+		\end{figure}
+	\end{minipage}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\centering
+	\textsc{\large Results for k=15;}\\[0.1 cm]  
+	\begin{minipage}{0.45\linewidth}
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_15_500.jpg}
+	 		\caption{superpixel level=500}
+		\end{figure}
+	\end{minipage}
+	\hspace{0.05\linewidth}
+	\begin{minipage}{0.45\linewidth}
+			\begin{figure} [H]
+				\centering
+				 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_15_2000.jpg}
+	 			\caption{superpixel level=2000}
+			\end{figure}
+	\end{minipage}
+	\hspace{0.05\linewidth}
+	\begin{minipage}{0.45\linewidth}
+		\begin{figure} [H]
+			\centering
+			 \includegraphics[width=\linewidth]{superpixel_rgb_hist/bee_15_5000.jpg}
+	 		\caption{superpixel level=5000}
+		\end{figure}
+	\end{minipage}
+\end{minipage}
 \subsubsection*{Mean Of Gabor Filter Responses}
 
-\subsection{Effects of Parameters}
-\paragraph{k parameter:} k parameter is defining the number of field.We are randomly choosing k point and trying to find the most close pixels for these point. When the definition of field is completed, for each field we are trying to find point of the mean of the field recursively. If we increase number of k, we can interested in less pixels because the fields have less size so we can see the image which has more details.
 
-\paragraph{Superpixel level:} Superpixel is finding field that has same color. Superpixel level is the number of the field has same color. If we are using high superpixel level, it can be search field that has less size and it could be draw that has same color area for each superpixel.So super pixel level is giving the color information in image and high superpixel level has more detail than low superpixel level in color perception. We can see the results in Figure 3-6-9. When k is equal 5, 
+\subsection{Effects of Parameters}
+We used numofSuperPixelx1x3 matrix for mean of RGB color values. We used all intensity values in RGB channels to divide image to segments by RGB color histogram procedure. We used numofSuperPixelx1x256*3 for RGB color histogram. We didn't generate a Gabor filter bank that why we didn't finish this step.
+
+
+
 
 \section{K-means Clustering}
 K-means clustering is the easiest way to fix clustering problem. The main idea is to define k field, one for each cluster. 
@@ -201,18 +347,11 @@ K-means clustering is the easiest way to fix clustering problem. The main idea i
 K-means function should be get two parameters(feature matrix, k). It should be generate k number of field. Then in the fields the mean should be changed recursively while it is same point for each field. It should be used for pixel-feature level features and superpixel-level features.
 \subsection{Solution}
 
-
-\subsubsection{Inputs Outputs}
-
-
 \subsection{Effects of Parameters}
-\paragraph{•}
+\paragraph{k parameter:} k parameter is defining the number of field.We are randomly choosing k point and trying to find the most close pixels for these point. When the definition of field is completed, for each field we are trying to find point of the mean of the field recursively. If we increase number of k, we can interested in less pixels because the fields have less size so we can see the image which has more details.
 
-\bibliographystyle{plain}
-\bibliography{biblist}
-  \begin{thebibliography}{1}
-  \bibitem{1} \url{https://en.wikipedia.org/wiki/Pyramid_(image_processing)}
-  \end{thebibliography}             
+\paragraph{Superpixel level:} Superpixel is finding field that has same color. Superpixel level is the number of the field has same color. In step one that is mean of RGB colors, if we are using high superpixel level, it can be search field that has less size and it could be draw that has same color area for each superpixel.So super pixel level is giving the color information in image and high superpixel level has more detail than low superpixel level in color perception.
+
+Superpixel level features is faster than pixel-level features. It is more efficienty than pixel-level features.           
+
 \end{document}
-
-
